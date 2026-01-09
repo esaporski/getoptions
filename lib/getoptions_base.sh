@@ -69,7 +69,7 @@ getoptions() {
 
 	_0 "${_def:-$2}() {"
 	_1 'OPTIND=$(($#+1))'
-	for mflag in $_mflags; do _1 "$(printf '%s' "$mflag" | tr '-' '_')_flag_declared=\"false\""; done
+	for mflag in $(printf '%s' "$_mflags"); do _1 "$(printf '%s' "$mflag" | tr '-' '_')_flag_declared=\"false\""; done
 	_1 "while OPTARG= && [ \"\${$_rest}\" != x ] && [ \$# -gt 0 ]; do"
 	[ "$_abbr" ] && getoptions_abbr "$@"
 
@@ -188,7 +188,7 @@ getoptions() {
 	_1 "done"
 	if [ -n "$_mflags" ]; then
 		_1 '[ $# -eq 0 ] &&'
-		for mflag in $_mflags; do
+		for mflag in $(printf '%s' "$_mflags"); do
 			_2 "[ \"\${$(printf '%s' "$mflag" | tr '-' '_')_flag_declared:-}\" = \"true\" ] &&"
 		done
 		_2 '{'
@@ -208,7 +208,7 @@ getoptions() {
 	if [ -n "$_mflags" ]; then
 		_2 '*)'
 		i=0
-		for mflag in $_mflags; do
+		for mflag in $(printf '%s' "$_mflags"); do
 			ind() { if [ "$i" -eq 0 ]; then "_3" "$@"; else "_4" "$@"; fi }
 			ind "{ [ -z \"\${1:-}\" ] && [ -z \"\${$(printf '%s' "$mflag" | tr '-' '_')_flag_declared:-}\" ] && set \"Mandatory argument: ${mflag}\" \"mandatory\" \"${mflag}\"; } ||"
 			i=$((i + 1))
