@@ -210,7 +210,7 @@ getoptions() {
 		i=0
 		for mflag in $_mflags; do
 			ind() { if [ "$i" -eq 0 ]; then "_3" "$@"; else "_4" "$@"; fi }
-			ind "{ [ -z \"\${1:-}\" ] && [ -z \"\${$(printf '%s' "$mflag" | tr '-' '_')_flag_declared:-}\" ] && set \"Mandatory argument: ${mflag}\" \"mandatory ${mflag}\"; } ||"
+			ind "{ [ -z \"\${1:-}\" ] && [ -z \"\${$(printf '%s' "$mflag" | tr '-' '_')_flag_declared:-}\" ] && set \"Mandatory argument: ${mflag}\" \"mandatory\" \"${mflag}\"; } ||"
 			i=$((i + 1))
 		done
 		_4 'set "Validation error ($1): $2" "$@"'
